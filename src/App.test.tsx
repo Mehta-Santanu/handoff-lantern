@@ -12,4 +12,16 @@ describe("Handoff Lantern", () => {
     expect(screen.getByRole("complementary", { name: /payment retries above baseline details/i })).toBeInTheDocument();
     expect(screen.getAllByText("HND-241").length).toBeGreaterThan(0);
   });
+
+  it("narrows the queue with search and filters", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.type(screen.getByRole("searchbox", { name: "Search handoffs" }), "inventory");
+    expect(screen.getByRole("button", { name: /warehouse sync awaiting replay/i })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /payment retries above baseline/i })).not.toBeInTheDocument();
+
+    await user.selectOptions(screen.getByRole("combobox", { name: "Status" }), "accepted");
+    expect(screen.getByRole("heading", { name: "No handoffs match" })).toBeInTheDocument();
+  });
 });
