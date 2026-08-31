@@ -12,6 +12,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">Skip to handoff queue</a>
       <AppHeader openCount={openCount} />
       <main id="main-content">
         <section className="page-heading">
