@@ -35,4 +35,15 @@ describe("Handoff Lantern", () => {
     expect(screen.getByRole("searchbox", { name: "Search handoffs" })).toHaveValue("");
     expect(screen.getAllByRole("article")).toHaveLength(6);
   });
+
+  it("advances a reviewed handoff to accepted", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: "Accept handoff" }));
+
+    expect(screen.getByText("Accepted", { selector: ".status-pill" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Accept handoff" })).not.toBeInTheDocument();
+    expect(screen.getByText("Handoff status changed to accepted.")).toBeInTheDocument();
+  });
 });
