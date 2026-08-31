@@ -24,4 +24,15 @@ describe("Handoff Lantern", () => {
     await user.selectOptions(screen.getByRole("combobox", { name: "Status" }), "accepted");
     expect(screen.getByRole("heading", { name: "No handoffs match" })).toBeInTheDocument();
   });
+
+  it("restores the full queue from the empty state", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.type(screen.getByRole("searchbox", { name: "Search handoffs" }), "no matching record");
+    await user.click(screen.getByRole("button", { name: "Reset controls" }));
+
+    expect(screen.getByRole("searchbox", { name: "Search handoffs" })).toHaveValue("");
+    expect(screen.getAllByRole("article")).toHaveLength(6);
+  });
 });
