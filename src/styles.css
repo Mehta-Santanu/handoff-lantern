@@ -354,3 +354,47 @@ main { width: min(1320px, calc(100% - 48px)); margin: 0 auto; padding: 54px 0 70
 .status-pill--reviewing { color: #3d6174; background: var(--blue-soft); }
 .status-pill--accepted { color: var(--green); background: var(--green-soft); }
 .primary-button { margin-left: auto; padding: 9px 13px; display: inline-flex; align-items: center; gap: 7px; border: 0; border-radius: 10px; color: white; background: var(--green); font-size: 0.76rem; font-weight: 700; box-shadow: 0 7px 16px rgba(49, 92, 76, 0.18); }
+
+@media (max-width: 1100px) {
+  .filter-panel { grid-template-columns: 1fr; }
+  .filter-selects { flex-wrap: wrap; }
+  .filter-footer { grid-column: 1; }
+  .workspace--detail { grid-template-columns: minmax(360px, 1fr) minmax(310px, 0.8fr); }
+  .handoff-list, .workspace:not(.workspace--detail) .handoff-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 780px) {
+  .app-header { padding: 0 18px; grid-template-columns: 1fr auto; }
+  .header-shift { display: none; }
+  main { width: min(100% - 28px, 650px); padding-top: 36px; }
+  .page-heading { align-items: flex-start; }
+  .shift-stamp { display: none; }
+  .metrics-strip { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .metric { min-width: 0; }
+  .metrics-note { grid-column: 1 / -1; margin: 4px 0 0; padding-top: 11px; border-top: 1px solid #e6dfd3; }
+  .workspace--detail { grid-template-columns: 1fr; }
+  .detail-panel { position: static; grid-row: 1; }
+}
+
+@media (max-width: 560px) {
+  .profile-button span { display: none; }
+  .profile-button { width: 38px; justify-content: center; padding: 0; }
+  .page-heading h1 { font-size: 2.2rem; }
+  .metrics-strip { grid-template-columns: 1fr; gap: 9px; }
+  .metric { padding: 2px 0; }
+  .metrics-note { grid-column: 1; }
+  .filter-selects { display: grid; grid-template-columns: 1fr 1fr; }
+  .filter-selects > svg { display: none; }
+  .filter-selects label, .filter-selects select { width: 100%; }
+  .handoff-list, .workspace:not(.workspace--detail) .handoff-list { grid-template-columns: 1fr; }
+  .detail-facts { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
