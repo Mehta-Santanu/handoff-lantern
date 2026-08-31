@@ -8,6 +8,12 @@ interface HandoffCardProps {
   onSelect: (id: string) => void;
 }
 
+const readableStatus = {
+  unread: "Unread",
+  reviewing: "Reviewing",
+  accepted: "Accepted",
+} as const;
+
 export function HandoffCard({ handoff, selected, onSelect }: HandoffCardProps) {
   return (
     <article className={`handoff-card${selected ? " handoff-card--selected" : ""}`}>
@@ -18,8 +24,13 @@ export function HandoffCard({ handoff, selected, onSelect }: HandoffCardProps) {
         onClick={() => onSelect(handoff.id)}
       >
         <span className="card-topline">
-          <span className={`urgency-chip urgency-chip--${handoff.urgency}`}>
-            {handoff.urgency}
+          <span className="card-labels">
+            <span className={`urgency-chip urgency-chip--${handoff.urgency}`}>
+              {handoff.urgency}
+            </span>
+            <span className={`queue-status queue-status--${handoff.status}`}>
+              {readableStatus[handoff.status]}
+            </span>
           </span>
           <span className="handoff-id">{handoff.id}</span>
         </span>

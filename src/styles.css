@@ -272,6 +272,7 @@ main { width: min(1320px, calc(100% - 48px)); margin: 0 auto; padding: 54px 0 70
 }
 .card-topline, .card-title-row, .card-meta { display: flex; align-items: center; }
 .card-topline { justify-content: space-between; }
+.card-labels { display: flex; align-items: center; gap: 6px; }
 .urgency-chip {
   display: inline-flex;
   padding: 4px 8px;
@@ -284,6 +285,9 @@ main { width: min(1320px, calc(100% - 48px)); margin: 0 auto; padding: 54px 0 70
 .urgency-chip--critical { color: #95401d; background: #f6d9c6; }
 .urgency-chip--attention { color: #896018; background: #f1e7bf; }
 .urgency-chip--routine { color: #536d62; background: #e1ebe4; }
+.queue-status { padding-left: 8px; border-left: 1px solid #d8d2c7; color: #777a72; font-size: 0.65rem; font-weight: 600; }
+.queue-status--unread { color: #9a4d25; }
+.queue-status--accepted { color: #48715f; }
 .handoff-id { color: #92948d; font-size: 0.69rem; font-weight: 600; letter-spacing: 0.04em; }
 .card-title-row { gap: 12px; margin-top: 15px; }
 .card-title-row svg { flex: 0 0 auto; margin-left: auto; color: #92948d; }
