@@ -46,4 +46,16 @@ describe("Handoff Lantern", () => {
     expect(screen.queryByRole("button", { name: "Accept handoff" })).not.toBeInTheDocument();
     expect(screen.getByText("Handoff status changed to accepted.")).toBeInTheDocument();
   });
+
+  it("updates checklist progress without closing details", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const decision = screen.getByRole("checkbox", { name: "Choose rollback or observe" });
+    expect(decision).not.toBeChecked();
+    await user.click(decision);
+
+    expect(decision).toBeChecked();
+    expect(screen.getByRole("complementary", { name: /payment retries above baseline details/i })).toBeInTheDocument();
+  });
 });
