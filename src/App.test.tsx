@@ -68,4 +68,15 @@ describe("Handoff Lantern", () => {
     const firstCard = screen.getAllByRole("article")[0];
     expect(within(firstCard).getByText("Analytics export backfill complete")).toBeInTheDocument();
   });
+
+  it("moves detail focus between handoffs and allows closing it", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /warehouse sync awaiting replay/i }));
+    expect(screen.getByRole("complementary", { name: /warehouse sync awaiting replay details/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Close details" }));
+    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
+  });
 });
