@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import App from "./App";
@@ -57,5 +57,15 @@ describe("Handoff Lantern", () => {
 
     expect(decision).toBeChecked();
     expect(screen.getByRole("complementary", { name: /payment retries above baseline details/i })).toBeInTheDocument();
+  });
+
+  it("sorts the visible queue by title", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.selectOptions(screen.getByRole("combobox", { name: "Sort handoffs" }), "title");
+
+    const firstCard = screen.getAllByRole("article")[0];
+    expect(within(firstCard).getByText("Analytics export backfill complete")).toBeInTheDocument();
   });
 });
